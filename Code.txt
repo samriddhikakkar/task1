@@ -1,0 +1,22 @@
+#IMPORT THE DATA IN FORM OF EXCEL
+> library(readxl)
+> student <- read_excel("~/Task1.xlsx", sheet = "Sheet1")
+> View(student)
+
+#CREATE NEW VARIABLES
+> x<-student$Scores
+> y<-student$Hours
+
+#PLOTTING THE GIVEN DATA
+> plot(x~y)
+> plot(x~y,pch=19,col="orange",main="Prediction Using Superwised ML",xlab="Hours",ylab="Scores")
+
+#REGRESSION
+> student.reg<-lm(Scores~Hours,data = student)
+> abline(student.reg, col="purple")
+> print(summary(student.reg))
+
+#PREDICT SCORE FOR 9.25 HOURS OF STUDY
+> hours_study<-data.frame(Hours=9.25)
+> prediction<-predict(student.reg,hours_study)
+> print(prediction)
